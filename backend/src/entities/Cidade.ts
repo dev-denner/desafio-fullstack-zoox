@@ -8,13 +8,13 @@ export class Cidade {
     public readonly id: string;
     public nome: string;
     public estadoId: string;
-    public readonly dateCreate: string;
-    public readonly dateLastUpadte: string;
+    private dateCreate: string;
+    private dateLastUpadte: string;
 
     constructor(props: Omit<Cidade, 'id'>, id?: string) {
         Object.assign(this, props);
 
-        if(!id){
+        if (!id) {
             this.id = uuid();
             this.dateCreate = moment.locale();
         }
