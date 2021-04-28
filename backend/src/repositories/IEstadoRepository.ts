@@ -1,6 +1,8 @@
 import { Estado } from "../entities/Estado";
 
 export interface IEstadoRepository {
-    findByName(nome: string): Promise<Estado>;
-    save(estado: Estado): Promise<void>;
+    list(query: any, sort: string, callback: any);
+    save(params: Estado, callback: any);
+    update(params: Estado, callback: any);
+    delete(id: String, callback: any);
 }

@@ -1,4 +1,4 @@
 export interface ICreateCidadeResquestDTO {
     nome: string;
-    estadoId: string;
+    estado_id: string;
 }

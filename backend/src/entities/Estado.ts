@@ -1,23 +1,17 @@
-import { uuid } from "uuidv4";
-import moment from 'moment';
-import 'moment/locale/pt-br';
-moment.locale('pt-br');
-
 export class Estado {
 
-    public readonly id: string;
+    public readonly _id: string;
     public nome: string;
     public abreviacao: string;
-    private dateCreate: string;
-    private dateLastUpadte: string;
+    private date_create: Date;
+    private last_update: Date;
 
-    constructor(props: Omit<Estado, 'id'>, id?: string) {
+    constructor(props: Omit<Estado, '_id'>, _id?: string) {
         Object.assign(this, props);
 
-        if(!id){
-            this.id = uuid();
-            this.dateCreate = moment.locale();
+        if (!_id) {
+            this.date_create = new Date(Date.now());
         }
-        this.dateLastUpadte = moment.locale();
+        this.last_update = new Date(Date.now());
     }
 }

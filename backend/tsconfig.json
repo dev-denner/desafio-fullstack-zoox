@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
+    "moduleResolution": "node",
+    "pretty": true,
     "strict": false,
     "allowJs": true,
     "esModuleInterop": true,
@@ -10,5 +12,8 @@
   },
   "include": [
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

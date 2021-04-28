@@ -1,6 +1,8 @@
-import { Cidade } from "../entities/Cidade";
+import { Cidade } from '../entities/Cidade';
 
 export interface ICidadeRepository {
-    findByName(nome: string, idEstado: string): Promise<Cidade>;
-    save(cidade: Cidade): Promise<void>;
+    list(query: any, sort: string, callback: any);
+    save(params: Cidade, callback: any);
+    update(params: Cidade, callback: any);
+    delete(id: String, callback: any);
 }

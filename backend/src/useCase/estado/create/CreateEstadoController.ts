@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CreateEstadoUseCase } from "./CreateEstadoUseCase";
+import { mongoError, successResponse } from '../../../common/response';
 
 export class CreateEstadoController {
     constructor(
@@ -9,12 +10,10 @@ export class CreateEstadoController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { nome, abreviacao } = request.body;
         try {
-            await this.createEstadoUseCase.execute({ nome, abreviacao });
-            return response.status(201).send();
+            const result = await this.createEstadoUseCase.execute({ nome, abreviacao });
+            return successResponse('Estado cadastrado com sucesso!', result, response);
         } catch (error) {
-            return response.status(400).json({
-                message: error.message || 'Unexpected error.'
-            });
+            return mongoError(error, response);
         }
     }
 }
