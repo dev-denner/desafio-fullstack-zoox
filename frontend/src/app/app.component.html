@@ -1,0 +1,15 @@
+<main role="main">
+  <div class="container-fluid">
+    <h1 class="display-2 text-center">Desafio Zoox</h1>
+    <div class="row">
+      <div class="col-sm-7">
+        <h3>Estados</h3>
+        <app-estados (idEstado)="setIdEstadoInCidade($event)"></app-estados>
+      </div>
+      <div class="col-sm-5">
+        <h4 *ngIf="idEstado">Cidades</h4>
+        <app-cidades [idEstado]="idEstado"></app-cidades>
+      </div>
+    </div>
+  </div>
+</main>

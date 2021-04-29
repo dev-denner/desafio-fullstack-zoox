@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from 'mongoose';
 import consola from 'consola';
 import q from 'q';
+import cors from 'cors';
 import environment from "./environment";
 import { EstadoRoutes } from "./routes/EstadoRoutes";
 import { CidadeRoutes } from "./routes/CidadeRoutes";
@@ -23,6 +24,7 @@ class App {
     }
 
     private config(): void {
+        this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
     }

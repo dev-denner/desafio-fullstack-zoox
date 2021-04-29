@@ -1,0 +1,65 @@
+<div *ngIf="idEstado">
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Buscar cidade" [(ngModel)]="buscaCidade"
+        (change)="pesquisarCidade()">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success" (click)="showChildModal('Criar')">Novo</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Criado em</th>
+          <th scope="col">Modificado em</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cidade of cidades">
+          <td>{{ cidade.nome }}</td>
+          <td>{{ cidade.date_create | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ cidade.last_update | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td class="actions">
+            <button type="button" class="btn btn-primary btn-sm" title="Editar" (click)="editarCidade(cidade)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" title="Apagar" (click)="apagarCidade(cidade._id)">
+              <i class="bi bi-trash2-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-child-name" class="modal-title pull-left">Nova Cidade</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nomeCidade">Nome</label>
+            <input type="text" class="form-control" id="nomeCidade" aria-describedby="nomeHelp" required
+              [(ngModel)]="cidade.nome">
+            <small id="nomeHelp" class="form-text text-muted">O nome completo da cidade</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="clearCidade(); hideChildModal()">Cancel</button>
+            <button type="submit" class="btn btn-outline-success"
+              (click)="salvarCidade(action); hideChildModal()">{{ action }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

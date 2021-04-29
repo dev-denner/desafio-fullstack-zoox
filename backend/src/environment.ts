@@ -23,7 +23,7 @@ class Environment {
         const secret = process.env.PASS_DB;
         const db = process.env.NAME_BD;
         const host = process.env.HOST_BD;
-        return `mongodb+srv://${user}:${secret}@${db}.${host}/${db}`;
+        return `mongodb+srv://${user}:${secret}@${host}/${db}`;
     }
 }
 

@@ -1,0 +1,73 @@
+<div class="form-group row">
+  <div class="col-sm-10">
+    <input type="text" class="form-control" placeholder="Buscar estado" [(ngModel)]="buscaEstado"
+      (change)="pesquisarEstado()">
+  </div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-success" (click)="showChildModal('Criar')">Novo</button>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Abreviação</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Criado em</th>
+        <th scope="col">Modificado em</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let estado of estados" [ngClass]="{'active': idActive === estado._id}">
+        <td>{{ estado.abreviacao }}</td>
+        <td>{{ estado.nome }}</td>
+        <td>{{ estado.date_create | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ estado.last_update | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td class="actions">
+          <button type="button" class="btn btn-info btn-sm" title="Ver Cidades" (click)="verCidade(estado._id)">
+            <i class="bi bi-building"></i>
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" title="Editar" (click)="editarEstado(estado)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" title="Apagar" (click)="apagarEstado(estado._id)">
+            <i class="bi bi-trash2-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Novo Estado</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="abreviacao">Abreviação</label>
+          <input type="text" class="form-control" id="abreviacao" aria-describedby="abreviacaoHelp" required
+            [(ngModel)]="estado.abreviacao">
+          <small id="abreviacao" class="form-text text-muted">A UF do estado, com dois (2) caracteres</small>
+        </div>
+        <div class="form-group">
+          <label for="nomeEstado">Nome</label>
+          <input type="text" class="form-control" id="nomeEstado" aria-describedby="nomeHelp" required
+            [(ngModel)]="estado.nome">
+          <small id="nomeHelp" class="form-text text-muted">O nome completo do estado</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="clearEstado(); hideChildModal()">Cancel</button>
+          <button type="submit" class="btn btn-outline-success"
+            (click)="salvarEstado(action); hideChildModal()">{{ action }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
